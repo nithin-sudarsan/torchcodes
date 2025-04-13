@@ -53,3 +53,56 @@ This servers as notes to show my learnings and programs related to PyTorch. Curr
     - `tensor.is_cuda`
   -`tensor.device(device_name)`
 </details>
+<details>
+  <summary>PyTorch workflow fundamentals</summary>
+  
+- Train-test split
+- Visualising data
+  - `matplotlib.pyplot`
+  - `plt.plot(x,y,label)`
+  - `plt.xlabel()`
+  - `plt.ylabel()`
+  - `plt.title()`
+  - `plt.legend()`
+- `nn.Module`
+- `nn.Parameter`
+- `def forward(self, tensor)`
+- `torch.manual_seed()`
+- `with torch.inference_mode()`
+- `model.eval()`
+- `model.state_dict()`
+- `y_pred = model(x_test)`
+- Loss functions
+  - Mean Average Error (MAE): `torch.nn.L1Loss()`
+  - Binary Cross Entropy (BCE) : `torch.nn.BCELoss()`
+- Optimizers
+  - Stochastic Gradient Descent (SGD): `torch.optim.SGD(params, lr)` [`lr` stands for learning rate]
+  - Adam Optimizer: `torch.optim.Adam()`
+- Steps in training loop
+  - `y_pred = model(x_train)`
+  - `loss = loss_fn(y_pred, y_train)`
+  - `optimizer.zero_grad()`
+  - `loss.backward()`
+  - `optimizer.step()`
+- Steps in testing loop
+  - `test_pred = model(x_test)`
+  - `testing_loss = loss_fn(test_pred, y_test.type(torch.float))`
+  - `loss.detach().numpy()`
+- `y_pred.detach()`
+- Saving model
+  - `MODEL_PATH = Path("directory_name")`
+  - `MODEL_PATH.mkdir(parents = True, exist_ok = True)`
+  - `MODEL_NAME = "model_name"`
+  - `MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME`
+  - `torch.save(obj = [model / state_dicts / tensors / objects], f = MODEL_SAVE_PATH`)
+- Loading model
+  - `loaded_model.load_state_dict(torch.load(f = MODEL_SAVE_PATH))`
+- `nn.Linear(in_features, out_features)`
+- Training on GPU
+  - `model.to(device)`
+  - `x_train = x_train.to(device)`
+  - similarly other parameters
+  - `next(model.parameters()).device` To check the device in which model is loaded
+  - `loss.cpu().detach().numpy()`
+  - `y_pred.cpu().detach()`
+</details>
